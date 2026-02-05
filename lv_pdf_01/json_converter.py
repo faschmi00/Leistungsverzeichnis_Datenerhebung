@@ -21,7 +21,7 @@ class JsonConverter:
         self.quelle = quelle
         self.gewerk = gewerk
 
-    def convert(self, input_txt: str, output_json: str, start_id: int = 1) -> None:
+    def convert(self, input_txt: str, output_json: str, start_id: int = 1000) -> None:
         lines = self._read_lines(input_txt)
         items = self._parse(lines, start_id=start_id)
 

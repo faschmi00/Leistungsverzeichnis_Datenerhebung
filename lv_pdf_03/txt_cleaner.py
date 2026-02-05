@@ -24,6 +24,8 @@ class TxtCleaner:
 
         lines = self._remove_stl_nr_lines(lines)
 
+        lines = self._remove_exact_unit_price_line(lines)
+
         self._write_file(output_txt, lines)
 
     def _delete_last_pages(self, lines: list[str]) -> list[str]:
@@ -166,7 +168,7 @@ class TxtCleaner:
         num = r"\d{1,3}(?:\.\d{3})*,\d{2}"
 
         # erlaubte Einheiten
-        unit = r"(?:Stck|St|to|t|m|m2|m3|m²|m³|Std|h|Psch|d)"
+        unit = r"(?:Stck|St|to|t|m|m2|m3|m²|m³|Std|Std.|h|Psch|d)"
 
         # Unterstrich-Blöcke
         underscores = r"(?:\s*_){5,}"
@@ -177,6 +179,19 @@ class TxtCleaner:
         )
 
         return [ln for ln in lines if not pattern.match(ln.strip())]
+
+    def _remove_exact_unit_price_line(self, lines: list[str]) -> list[str]:
+        """
+        Entfernt exakt die Zeile:
+        '1,00 h _______________ nur Einheitspreis'
+        (führende / nachfolgende Leerzeichen werden ignoriert)
+        """
+        target = "1,00 h _______________ nur Einheitspreis"
+
+        return [
+            ln for ln in lines
+            if ln.strip() != target
+        ]
 
     def _read_file(self, path: str) -> list[str]:
         with open(path, "r", encoding="utf-8") as f:

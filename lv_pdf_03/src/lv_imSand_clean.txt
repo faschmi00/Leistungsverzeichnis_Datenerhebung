@@ -2944,7 +2944,6 @@ auszuführenden Positionen einkalkuliert werden.
 1.12.20. Baufacharbeiter 
 Baufacharbeiter 
  
- 1,00 h _______________ nur Einheitspreis 
  
 
 
@@ -2953,7 +2952,6 @@ Baufacharbeiter
 1.12.30. Bauwerker 
 Bauwerker 
  
- 1,00 h _______________ nur Einheitspreis 
  
   
 Stundenlohnarbeiten durch Baugeräte auf Anordnung des 
@@ -2974,31 +2972,26 @@ Arbeitsstunden.
 1.12.40. Bagger über 0,4 bis 1,0 m³ 
 Bagger über 0,4 bis 1,0 m³ 
  
- 1,00 h _______________ nur Einheitspreis 
  
  *Eventualposition 
 1.12.50. Frontlader, luftbereift über 45 bis 75 kW 
 Frontlader, luftbereift über 45 bis 75 kW 
  
- 1,00 h _______________ nur Einheitspreis 
  
  *Eventualposition 
 1.12.60. Flächenrüttler (Rüttelverdichter) über 0,75-1,3 t 
 Flächenrüttler (Rüttelverdichter) über 0,75-1,3 t 
  
- 1,00 h _______________ nur Einheitspreis 
  
  *Eventualposition 
 1.12.70. Kompressor über 5 bis 10 m³/mon. 
 Kompressor über 5 bis 10 m³/mon. 
  
- 1,00 h _______________ nur Einheitspreis 
  
  *Eventualposition 
 1.12.80. Bohr- und Abbauhammer bis 20 kg. 
 Bohr- und Abbauhammer bis 20 kg. 
  
- 1,00 h _______________ nur Einheitspreis 
  
   
 Stundenlohnarbeiten durch Lastkraftwagen auf Anordnung 
@@ -3024,7 +3017,6 @@ Sonderfahrzeuge).
 1.12.90. LKW-Kipper mit Allradantrieb, ca. 12 t Nutzlast 
 LKW-Kipper mit Allradantrieb, ca. 12 t Nutzlast 
  
- 1,00 h _______________ nur Einheitspreis 
  
  
  Summe Abschnitt 1. Verkehrsanlagen und Kanal __________________ 
@@ -3895,7 +3887,6 @@ Minibagger
 2.09.50. Mobilbagger über 0,4 bis 1,0 m3 
 Mobilbagger über 0,4 bis 1,0 m3 
  
- 10,00 Std. _______________ __________________ 
  
 2.09.60. Frontlader, luftbereift über 45-75 KW 
 Frontlader, luftbereift über 45-75 KW 

@@ -16,7 +16,9 @@ class TxtCleaner:
 
         lines = self._remove_sum_lines(lines)
 
-        lines = self.merge_exception_blocks(lines)
+        lines = self._merge_exception_blocks(lines)
+
+        lines = self._remove_einh_pr_line(lines)
 
         self._write_file(output_txt, lines)
 
@@ -31,7 +33,7 @@ class TxtCleaner:
 
         return lines
 
-    def merge_exception_blocks(self, lines: list[str]) -> list[str]:
+    def _merge_exception_blocks(self, lines: list[str]) -> list[str]:
         """
         Findet GENAU definierte StL-Blöcke und führt sie jeweils zu einer Zeile zusammen.
         """
@@ -238,7 +240,7 @@ class TxtCleaner:
         num = r"\d{1,3}(?:\.\d{3})*,\d{1,3}"
 
         # Einheiten (nach Bedarf erweitern)
-        unit = r"(?:m³|m²|m|t|h|Stck|St|Psch)"
+        unit = r"(?:m³|m²|m|t|h|Stck|St|psch|Psch)"
 
         # Dots: mindestens 5 Punkte (mit optionalen Leerzeichen dazwischen)
         dots = r"(?:\s*\.){5,}"
@@ -246,6 +248,19 @@ class TxtCleaner:
         pattern = re.compile(rf"^\s*{num}\s*{unit}\s*{dots}\s*$")
 
         return [ln for ln in lines if not pattern.match(ln.strip())]
+
+    def _remove_einh_pr_line(self, lines: list[str]) -> list[str]:
+        """
+        Entfernt exakt die Zeile:
+        '1,000 h ......................... Nur Einh.-Pr.'
+        (Leerzeichen am Anfang/Ende werden ignoriert)
+        """
+        target = "1,000 h ......................... Nur Einh.-Pr."
+
+        return [
+            ln for ln in lines
+            if ln.strip() != target
+        ]
 
     def _read_file(self, path: str) -> list[str]:
         with open(path, "r", encoding="utf-8") as f:

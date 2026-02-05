@@ -1,5 +1,6 @@
 from lv_pdf_03.txt_converter import TxtConverter
 from lv_pdf_03.txt_cleaner import TxtCleaner
+from lv_pdf_03.json_converter import JsonConverter
 
 
 class Pdf03ToJSON:
@@ -9,8 +10,8 @@ class Pdf03ToJSON:
     CLEAN_TXT = "lv_pdf_03/src/lv_imSand_clean.txt"
     OUTPUT_JSON = "lv_list.json"
 
-    GEWERK = "Rohbauarbeiten"
-    QUELLE = "https://rheinhausen.de/pb/site/Rheinhausen/get/documents_E-1590600849/rheinhausen/Dateien/180518%20LV%203.13%20Rohbauarbeiten%2016-018.pdf"
+    GEWERK = "Verkehrsanlagen, Kanal und Tiefbau"
+    QUELLE = "https://www.bruchsal.de/site/Bruchsal-Internet/get/documents/bruchsal-internet/PB5Documents/pdf/LV-ImSand.pdf"
 
     def convert_to_json(self, input_pdf: str = None, output_json: str = None) -> None:
         # Defaults verwenden, wenn nichts übergeben wurde
@@ -25,9 +26,8 @@ class Pdf03ToJSON:
         TxtCleaner().clean_document(self.RAW_TXT, self.CLEAN_TXT)
         print("TXT bereinigt:", self.CLEAN_TXT)
 
-        """
         # 3) TXT -> JSON
         parser = JsonConverter(quelle=self.QUELLE, gewerk=self.GEWERK)
         parser.convert(self.CLEAN_TXT, self.OUTPUT_JSON, self.OUTPUT_JSON)
-        print("JSON erstellt:", output_json)"""
+        print("JSON erstellt:", output_json)
 

@@ -105,12 +105,10 @@ Vorhalten, Unterhaltung, Beleuchten und Bedienen der hierfür
 benötigten Geräte während der Bauzeit bei Tag und Nacht.
 Die Betriebskosten der Beleuchtungseinrichtung sind
 einzurechnen.
-1,000 psch .........................
 01.02.0002. Verkehrs- und Baustellensicherungsplan erstellen
 Beschilderungs- und Baustellensicherungsplan erstellen und in
 in 6-facher Ausfertigung dem  AG vorlegen. Vorlage der VZ-
 Pläne spätetens 4 Wochen vor Baubeginn.
-1,000 psch .........................
 01.02.0003. Einholen der Verkerhsrechtlichen Anordnung
 Einholen der verkehrsrechtlichen Anordnung für die Baustellen -
 beschilderung und -sicherung. Die verkehrsrechtliche
@@ -119,7 +117,6 @@ einzuholen und dem AG vorzulegen . Die Gebühr für das
 Einholen der verkehrsrechtlichen Anordnung ist in die Position
 einzukalkulieren. Diese Pauschale gilt für die gesamte Bauzeit
 und wird nur einmal vergütet.
-1,000 psch .........................
 01.02.0004. Verkehrszeichen aufstellen, Gefahrenzeichen
 Gefahrenzeichen nach § 40 STVO, Oberfläche
 retroreflektierend, mit Aufstellvorrichtung, aufstellen, über
@@ -988,7 +985,6 @@ Trennungsgleder, Auslösungen etc . sowie Vorhaltung aller
 werkzeuge und Geräte folgende Lohnsätze Anwendung.
 01.08.0001. Veranschlagte Stundenlohnarbeiten gem. Vortext
 Veranschlagte Stundenlohnarbeiten gemäß Vortext.
-1,000 psch .........................
 01.08.0002. *** Bedarfsposition ohne GB Personal
 Anzubieten sind (gemittelte) Stundenlohnverrechnungssätze für
 Arbeitskräfte.
@@ -1018,7 +1014,6 @@ Die Rapporte sind täglich bzw . auf Verlangen des Auftraggbers
 oder dessen Verteter unverzüglich vorzulegen.
 Beruf: sämtliches auf der Baustelle eingesetztes Personal
 (Polier, Facharbeiter, Helfer etc.).
-1,000 h ......................... Nur Einh.-Pr.
 01.08.0003. *** Bedarfsposition ohne GB Verrechnungssatz Bagger
 Stundenlohnarbeiten mit Baugeräten auf Anordnung des AG
 ausführen. Der Verrechnungssatz für das jeweilige Gerät
@@ -1032,44 +1027,35 @@ geleisteten Arbeitsstunden . Zuschläge für Nacht -, Sonntags-
 und Feiertagsarbeit werden gesondert vergütet . Diese
 Bemerkunge gelten für alle nachfolgenden Baugeräte.
 auf der Baustelle eingesetzter Bagger
-1,000 h ......................... Nur Einh.-Pr.
 01.08.0004. *** Bedarfsposition ohne GB Verrechnungssatz für Baugerät, Rüttler
 Wie Vorpostion, jedoch
 Verrechnungssatz für Baugerät, Rüttler.
-1,000 h ......................... Nur Einh.-Pr.
 
 
 01.08.0005. *** Bedarfsposition ohne GB Verrechnungssatz für auf der Baustelle eingesetzten Frontlader
 Wie Vorpostion, jedoch
 Verrechnungssatz für Frontlader.
-1,000 h ......................... Nur Einh.-Pr.
 01.08.0006. *** Bedarfsposition ohne GB Verrechnungssatz für LKW, LKW-Kipper 8 t Nutzlast
 Wie Vorpostion, jedoch
 Verrechnungssatz für LKW-Kipper, 8 t Nutzlast.
-1,000 h ......................... Nur Einh.-Pr.
 01.08.0007. *** Bedarfsposition ohne GB Verrechnungssatz für Kleintransporter
 Wie Vorpostion, jedoch
 Verrechnungssatz für Kleintransporter.
-1,000 h ......................... Nur Einh.-Pr.
 01.08.0008. *** Bedarfsposition ohne GB Verrechnungssatz für Kompressor mit Abbauhammer
 Wie Vorpostion, jedoch
 Verrechnungssatz für Kompressor mit Abbauhammer.
-1,000 h ......................... Nur Einh.-Pr.
 01.08.0009. *** Bedarfsposition ohne GB Verrechnungssatz für Motorflex mit Diamantscheibe
 Wie Vorpostion, jedoch
 Verrechnungssatz für Motorflex mit Diamantscheibe.
-1,000 h ......................... Nur Einh.-Pr.
 01.08.0010. *** Bedarfsposition ohne GB Verrechnungssatz für Minibagger
 Wie Vorpostion, jedoch
 Verrechnungssatz für Minibagger.
-1,000 h ......................... Nur Einh.-Pr.
 
 
 01.08.0011. *** Bedarfsposition ohne GB
 Verrechnungssatz für Explosionsstampfer, ca. 0,1 t
 Wie Vorpostion, jedoch
 Verrechnungssatz für Explosionsstampfer ca. 0,1 t.
-1,000 h ......................... Nur Einh.-Pr.
 01.08.0012. *** Bedarfsposition ohne GB
 Zementmörtel MG III
 Zementmörtel MG III
@@ -1136,7 +1122,6 @@ Vorhalten, Unterhaltung, Beleuchten und Bedienen der hierfür
 benötigten Geräte während der Bauzeit bei Tag und Nacht.
 Die Betriebskosten der Beleuchtungseinrichtung sind
 einzurechnen.
-1,000 psch .........................
 02.01.0004. Laufsteg mit Seitenschutz, B 0,5 -1m L2-4m
 Laufsteg zur Überbrückung , mit Seitenschutz ,
 Fussgängerbrücke, aus Holz , Seitenschutz Rundrohr , Breite
