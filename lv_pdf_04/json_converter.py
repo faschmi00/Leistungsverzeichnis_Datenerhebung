@@ -7,30 +7,32 @@ class JsonConverter:
     """
     TXT -> JSON im gewünschten Format.
 
-    WICHTIG (dein Format):
-    - Titelnummer: "1. 4" (zwei Blöcke), KEIN Punkt am Ende der Blockfolge
-      Beispiel (teilweise doppelt im Text):
-        "1. 4 VERSORGUNGSTRÄGER TW1. 4 VERSORGUNGSTRÄGER TW"
-      -> titel = "VERSORGUNGSTRÄGER TW"
+    Vorgaben:
+    - Titelzeile:
+        "01.02   Titel   Maurerarbeiten"
+      -> titel = "Maurerarbeiten"
       -> gilt bis zum nächsten Titel
 
-    - Positionszeile: drei Blöcke, nach den ersten zwei Blöcken kommen >= 3 Leerzeichen,
-      KEIN Punkt am Ende der Blockfolge
-      Beispiel:
-        "1. 3.   1 Oberboden abtragen und zwischenlagern"
-      -> positionsnummer = "1.3.1"
+    - Positionszeile (MUSS am Zeilenanfang stehen):
+        "01.01.02.008 händisches Freilegen bestehender"
+      -> positionsnummer = "01.01.02.008"
       -> kurztext = Rest der Zeile
 
-    - Langtext: alle Folgezeilen bis zur nächsten Position oder zum nächsten Titel
+    - Langtext:
+      alle Folgezeilen bis zur nächsten Positionszeile (4 Blöcke)
+      ODER bis zur nächsten Titelzeile (2 Blöcke + 'Titel')
 
-    - IDs: bestehende JSON hat schon ids -> fortführen (max(id)+1)
+    - IDs:
+      Wenn existing_json (oder output_json) existiert, wird max(id)+1 als Start verwendet.
     """
 
-    # Titel: "1. 4 <Titeltext>"  (kein 'Titel:' mehr!)
-    RE_TITLE = re.compile(r"^\s*(\d{1,2})\.\s*(\d{1,2})\s+(.+\S)\s*$")
+    # Titel: genau 2 Blöcke (je 2 Stellen) + "Titel" + Text
+    RE_TITLE = re.compile(r"^\s*(\d{2})\.(\d{2})\s+Titel\s+(.+\S)\s*$", re.IGNORECASE)
 
-    # Position: "1. 3.   1 <Kurztext>"  (>=3 Spaces vor dem 3. Block)
-    RE_POS = re.compile(r"^\s*(\d{1,2})\.\s*(\d{1,2})\.\s{3,}(\d{1,4})\s+(.+\S)\s*$")
+    # Position: genau 4 Blöcke (2.2.2.3/4-stellig) am Zeilenanfang + Kurztext
+    RE_POS = re.compile(
+        r"^\s*(\d{2})\.(\d{2})\.(\d{2})\.(\d{3,4})\s+(.+\S)\s*$"
+    )
 
     def __init__(self, quelle: str, gewerk: str):
         self.quelle = quelle
@@ -60,40 +62,43 @@ class JsonConverter:
 
         while i < len(lines):
             raw = lines[i].rstrip("\n")
-            ln = raw.strip()
+            s = raw.strip()
 
-            if not ln:
+            if not s:
                 i += 1
                 continue
 
-            # Position zuerst prüfen (damit "1. 3.   1 ..." nicht als Titel fehlinterpretiert wird)
-            mp = self.RE_POS.match(raw)
+            # Titel erkennen
+            mt = self.RE_TITLE.match(s)
+            if mt:
+                current_title = mt.group(3).strip()
+                i += 1
+                continue
+
+            # Position erkennen
+            mp = self.RE_POS.match(s)
             if mp:
-                a, b, c = mp.group(1), mp.group(2), mp.group(3)
-                kurztext = mp.group(4).strip()
-                positionsnummer = f"{int(a)}.{int(b)}.{int(c)}"
+                positionsnummer = f"{mp.group(1)}.{mp.group(2)}.{mp.group(3)}.{mp.group(4)}"
+                kurztext = mp.group(5).strip()
 
                 i += 1
 
                 # Langtext sammeln bis nächste Position oder nächster Titel
                 lang_lines: List[str] = []
                 while i < len(lines):
-                    r2 = lines[i].rstrip("\n")
-                    s2 = r2.strip()
+                    nxt_raw = lines[i].rstrip("\n")
+                    nxt = nxt_raw.strip()
 
-                    if not s2:
+                    if not nxt:
                         lang_lines.append("")
                         i += 1
                         continue
 
-                    if self.RE_POS.match(r2):
+                    # Abgrenzung: neue Position oder neuer Titel
+                    if self.RE_POS.match(nxt) or self.RE_TITLE.match(nxt):
                         break
 
-                    # Titel beginnt mit "X. Y " (zwei Blöcke)
-                    if self.RE_TITLE.match(s2):
-                        break
-
-                    lang_lines.append(r2)
+                    lang_lines.append(nxt_raw)
                     i += 1
 
                 langtext = "\n".join(lang_lines).strip()
@@ -110,45 +115,9 @@ class JsonConverter:
                 next_id += 1
                 continue
 
-            # Titel prüfen
-            mt = self.RE_TITLE.match(ln)
-            if mt:
-                a, b = mt.group(1), mt.group(2)
-
-                # Doppelte Titel auf einer Zeile entfernen (z.B. "...TW1. 4 ...TW")
-                ln_first = self._cut_repeated_title(ln, a, b)
-
-                # Titeltext nochmal aus dem gekürzten Teil extrahieren
-                mt2 = self.RE_TITLE.match(ln_first)
-                if mt2:
-                    current_title = mt2.group(3).strip()
-
-                i += 1
-                continue
-
             i += 1
 
         return results
-
-    def _cut_repeated_title(self, line: str, a: str, b: str) -> str:
-        """
-        Falls eine Titelzeile denselben Titel zweimal hintereinander enthält (ohne Zeilenumbruch),
-        wird alles ab dem zweiten Vorkommen von "a. b" abgeschnitten.
-        Beispiel:
-          "1. 4 VERS...TW1. 4 VERS...TW" -> "1. 4 VERS...TW"
-        """
-        # suche zweites Vorkommen der Titelnummer "a. b" irgendwo später
-        # toleriert fehlende Leerzeichen zwischen Text und zweitem "a. b"
-        patt = re.compile(rf"\b{re.escape(a)}\.\s*{re.escape(b)}\b")
-        m1 = patt.search(line)
-        if not m1:
-            return line
-
-        m2 = patt.search(line, m1.end())
-        if not m2:
-            return line
-
-        return line[:m2.start()].rstrip()
 
     # -------------------------
     # IO / Existing JSON
@@ -159,11 +128,26 @@ class JsonConverter:
             return f.readlines()
 
     def _load_existing(self, path: str) -> Tuple[int, List[Dict]]:
+        """
+        Lädt vorhandene JSON-Liste, um IDs fortzuführen.
+        Wenn Datei nicht existiert / leer ist / ungültig ist => startet bei 1.
+        """
         try:
             with open(path, "r", encoding="utf-8") as f:
-                data = json.load(f)
+                raw = f.read().strip()
+
+                # Datei existiert, aber ist leer
+                if not raw:
+                    return 1, []
+
+                data = json.loads(raw)
+
                 existing_items = data if isinstance(data, list) else []
+
         except FileNotFoundError:
+            return 1, []
+        except json.JSONDecodeError:
+            # Datei ist kaputt/kein JSON -> wie "neu starten"
             return 1, []
 
         max_id = 0
